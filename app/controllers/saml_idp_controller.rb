@@ -1,5 +1,6 @@
 class SamlIdpController < SamlIdp::IdpController
   def new
+    super
   end
 
   def show
