@@ -6,7 +6,7 @@ services:
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./docker/mysql/data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: saml_sp_rails
+      MYSQL_DATABASE: saml_idp_rails
       MYSQL_ROOT_PASSWORD: password
       MYSQL_USER: samladmin
       MYSQL_PASSWORD: password
