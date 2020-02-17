@@ -1,6 +1,5 @@
 class SamlIdpController < SamlIdp::IdpController
   def new
-    super
   end
 
   def show
@@ -37,4 +36,8 @@ class SamlIdpController < SamlIdp::IdpController
     user.logout
   end
   private :idp_logout
+
+  # これで判定しているのでログイン画面をデバッグしたい時は空でOverrride
+  # def validate_saml_request
+  # end
 end
