@@ -1,17 +1,41 @@
 SamlIdp.configure do |config|
-  base = 'http://http://localhost:3456'
+  base = 'http://localhost:3456'
 
-  config.x509_certificate = <<-CERT
-  -----BEGIN CERTIFICATE-----
-  CERTIFICATE DATA
-  -----END CERTIFICATE-----
-  CERT
+  # config.x509_certificate = <<-CERT
+  #   -----BEGIN CERTIFICATE-----
+  #   MIICRDCCAa0CFB2tz7zx7eJ9Gbid5CQN1CmdDiUKMA0GCSqGSIb3DQEBCwUAMGEx
+  #   CzAJBgNVBAYTAkpQMQ4wDAYDVQQIDAVUb2t5bzERMA8GA1UEBwwIU2V0YWdheWEx
+  #   DzANBgNVBAoMBmdyYWJzczELMAkGA1UECwwCc3MxETAPBgNVBAMMCGlyb2hhZm94
+  #   MB4XDTIwMDIxNzA4MjcwMVoXDTIxMDIxNjA4MjcwMVowYTELMAkGA1UEBhMCSlAx
+  #   DjAMBgNVBAgMBVRva3lvMREwDwYDVQQHDAhTZXRhZ2F5YTEPMA0GA1UECgwGZ3Jh
+  #   YnNzMQswCQYDVQQLDAJzczERMA8GA1UEAwwIaXJvaGFmb3gwgZ8wDQYJKoZIhvcN
+  #   AQEBBQADgY0AMIGJAoGBALodohMLLV+oLphaMjUtoWT8+Ox88oRt0AtmLe8KkKSe
+  #   Y6z2q+QZA19mPVLWaIYkgoQkFZQGy+kFv+uYFtFqZsg5XXzgnn3KFfEumgPK+MZg
+  #   sAAhmxmH8oVGq3SVh/zJadoPVGTuMc0LbNCBQg7tY3GCC+CxxcTC59a94X98TbUz
+  #   AgMBAAEwDQYJKoZIhvcNAQELBQADgYEAZcCsdyYrzMcqmWfTsBLB9vCu7ZYpBav6
+  #   btmmdv5oW7T/PtoaDbuTptLqlkt8lrXQHRgv2/uUY5pR1lJGeRF57w3N3HV/fXXe
+  #   RfmDCOteR4R9LMnY21UkgxOZj1WZvCqOlz8RxOzRak98qayoAyGVH7hyjoafteiz
+  #   dbeSg0OO9Oo=
+  #   -----END CERTIFICATE-----
+  # CERT
 
-    config.secret_key = <<-CERT
-  -----BEGIN RSA PRIVATE KEY-----
-  KEY DATA
-  -----END RSA PRIVATE KEY-----
-  CERT
+  # config.secret_key = <<-CERT
+  #   -----BEGIN RSA PRIVATE KEY-----
+  #   MIICWwIBAAKBgQC6HaITCy1fqC6YWjI1LaFk/PjsfPKEbdALZi3vCpCknmOs9qvk
+  #   GQNfZj1S1miGJIKEJBWUBsvpBb/rmBbRambIOV184J59yhXxLpoDyvjGYLAAIZsZ
+  #   h/KFRqt0lYf8yWnaD1Rk7jHNC2zQgUIO7WNxggvgscXEwufWveF/fE21MwIDAQAB
+  #   AoGAL2FT3V0/E9cQ5aAwn/EZ4Ue1Zx737la2W/CLSQt7fy0DWwkBAXSMs0Cn4+rJ
+  #   eTzaLSGyjJieWJgqH6P8Sxu3RlnqhMldVD+bZQbKWKcV6/rJ91zoFAt/mYbqVMCX
+  #   GAZAFHpUvMFVsUNEtn482mo3EBuJ4zu3HLbJZ/SjjW37uwECQQDzM5RBEaSCGnME
+  #   A71zWkffZnL6GTzzeWc1fmUj31hkNOlhJBO4JIOat0xihUnJpVWEeC9OCveMg5Oe
+  #   RfWsWaUhAkEAw+j+G1A+599vKDP1bS8cWodyaV9ah8YRQyNt6x/i+njXeqzsxJdX
+  #   6QmTDPLFZkBvylvMTyH35rFethwHPdw70wJASdbtOlxa8E2LgjqIeM9+Zuu6GQk0
+  #   ok/H8Evx9VRIiBQwj5fejNg5RO5GONtzLdAPCOtcoXte8cC5PyLKlouZQQJAOZhO
+  #   1DLUO5DpefVEivPVrxuw3B+nWtE1E/rffsdiEGbkWnFqLiWcN6uT6rOYqwX4l5JD
+  #   T2RaIB03DezRiDMt9wJAHFLXE0HVd70gR23+OP/mUISP/GLPsKpOF7DM1ciFTIe6
+  #   jNzwA2HnRDhdzI4KiKgRzBnOOUZcULZOTvjSgiH/Rw==
+  #   -----END RSA PRIVATE KEY-----
+  # CERT
 
   # config.password = 'secret_key_password'
   # config.algorithm = :sha256
@@ -95,13 +119,13 @@ SamlIdp.configure do |config|
   # config.technical_contact.email_address = 'example@example.com'
 
   service_providers = {
-    'localhost:3000/users/saml/auth' => {
+    'localhost:3000' => {
       fingerprint: '9E:65:2E:03:06:8D:80:F2:86:C7:6C:77:A1:D9:14:97:0A:4D:F4:4D',
       metadata_url: 'http://localhost:3000/users/saml/metadata',
 
       # We now validate AssertionConsumerServiceURL will match the MetadataURL set above.
       # *If* it's not going to match your Metadata URL's Host, then set this so we can validate the host using this list
-      response_hosts: ['localhost:3000']
+      # response_hosts: ['192.168.11.6:3000']
     },
   }
 
