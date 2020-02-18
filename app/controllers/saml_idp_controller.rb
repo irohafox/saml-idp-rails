@@ -1,6 +1,6 @@
 class SamlIdpController < SamlIdp::IdpController
   def new
-    super
+    render :new
   end
 
   def show
@@ -8,19 +8,29 @@ class SamlIdpController < SamlIdp::IdpController
   end
 
   def create
-    super
+    unless params[:email].blank? && params[:password].blank?
+      user = idp_authenticate(params[:email], params[:password])
+      if user.nil?
+        @saml_idp_fail_msg = "Incorrect email or password."
+      else
+        @saml_response = idp_make_saml_response(user)
+        render :saml_post, layout: false
+        return
+      end
+    end
+    render :new
   end
 
   def logout
     super
   end
 
-  # 以下は公式サンプル(https://github.com/saml-idp/saml_idp)
-  def idp_authenticate(email, password) # not using params intentionally
-    user = User.by_email(email).first
+  private
+
+  def idp_authenticate(email, password)
+    user = User.find_by(email: email)
     user && user.valid_password?(password) ? user : nil
   end
-  private :idp_authenticate
 
   def idp_make_saml_response(found_user) # not using params intentionally
     # NOTE encryption is optional
@@ -30,15 +40,9 @@ class SamlIdpController < SamlIdp::IdpController
       key_transport: 'rsa-oaep-mgf1p'
     }
   end
-  private :idp_make_saml_response
 
   def idp_logout
     user = User.by_email(saml_request.name_id)
     user.logout
   end
-  private :idp_logout
-
-  # これで判定しているのでログイン画面をデバッグしたい時は空でOverrride
-  # def validate_saml_request
-  # end
 end

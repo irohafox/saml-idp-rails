@@ -202,6 +202,13 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    xmlenc (0.7.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      nokogiri (>= 1.6.0, < 2.0.0)
+      xmlmapper (>= 0.7.3)
+    xmlmapper (0.7.3)
+      nokogiri (~> 1.5)
     zeitwerk (2.2.2)
 
 PLATFORMS
@@ -225,6 +232,7 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (~> 4.0)
+  xmlenc
 
 RUBY VERSION
    ruby 2.6.3p62
