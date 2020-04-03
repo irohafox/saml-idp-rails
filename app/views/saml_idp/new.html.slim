@@ -1,0 +1,15 @@
+- if @saml_idp_fail_msg
+  div id="saml_idp_fail_msg" class="flash error"
+    = @saml_idp_fail_msg
+
+= form_tag do
+  = hidden_field_tag('SAMLRequest', params[:SAMLRequest])
+  = hidden_field_tag('RelayState', params[:RelayState])
+  div
+    = label_tag :email
+    = email_field_tag :email, params[:email], autofocus: 'autofocus'
+  div
+    = label_tag :password
+    = password_field_tag :password, params[:password]
+  div
+    = submit_tag 'ログイン'
